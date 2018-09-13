@@ -20,7 +20,8 @@ class BasicComponent extends Component {
         <input value={this.state.value} onChange={this.onInputChange} />
         <button onClick={this.onClick}>click</button>
         <div>
-          {this.props.reducer.map((value, i) => <div key={i}>{value}</div>)}
+          dsknkaefe
+          {/* {this.props.reducer.map((value, i) => <div key={i}>{value}</div>)} */}
         </div>
       </div>
     );

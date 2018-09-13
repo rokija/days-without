@@ -1,30 +1,44 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import AddItem from "../AddItem";
+import AddItem from "../../containers/AddItem";
 
-const data = [{ name: "alcohol" }, { name: "whatever" }];
+const data = [{ name: "alcohol", count: 0 }, { name: "whatever", count: 0 }];
 
 class Home extends Component {
   state = {
-    showModal: false
+    showModal: false,
+    list: data
   };
 
   onModalOpen = () => this.setState({ showModal: true });
+
   onModalClose = () => this.setState({ showModal: false });
+
+  submitItem = (without, count) => {
+    const { list } = this.state;
+
+    this.setState({ list: [...list, { count, name: without }] });
+  };
 
   render() {
     const { showModal } = this.state;
+    console.log(this.props.user);
 
     return (
       <div>
         <h2>Days without</h2>
-        {data.map((el, i) => (
+        {this.props.user.map((el, i) => (
           <div key={i}>
             <Link to={`/without/${i}`}>{el.name}</Link>
           </div>
         ))}
         <button onClick={this.onModalOpen}>Add New</button>
-        {showModal && <AddItem closeModal={this.onModalClose} />}
+        {!showModal && (
+          <AddItem
+            closeModal={this.onModalClose}
+            submitItem={this.submitItem}
+          />
+        )}
       </div>
     );
   }
